@@ -1,0 +1,10 @@
+# Requirements for VPrint Printer Agent - Linux/Raspberry Pi Version
+
+# Core dependencies
+requests>=2.31.0          # HTTP library for API calls
+python-dotenv>=1.0.0      # Environment variable management
+supabase>=2.0.0           # Supabase Python client
+pypdf>=3.0.0              # PDF processing library
+
+# Note: pywin32 is NOT included (Windows-specific)
+# This version uses CUPS (lp command) instead of SumatraPDF for printing

@@ -1,0 +1,28 @@
+[Unit]
+Description=VPrint Printer Agent Service
+After=network-online.target
+Wants=network-online.target
+StartLimitBurst=5
+StartLimitIntervalSec=60
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/print666/print/printer-agent
+Environment="PATH=/usr/local/bin:/usr/bin:/bin"
+Environment="PYTHONUNBUFFERED=1"
+ExecStart=/usr/bin/python3 /home/pi/print666/print/printer-agent/agent_linux.py
+Restart=on-failure
+RestartSec=10
+
+# Output logging to systemd journal
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=vprint-agent
+
+# Resource limits
+MemoryLimit=512M
+CPUQuota=50%
+
+[Install]
+WantedBy=multi-user.target
