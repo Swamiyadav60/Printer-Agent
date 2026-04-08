@@ -1,0 +1,11 @@
+# VPrint Printer Agent - Raspberry Pi 3B+ Dependencies
+# Install: pip install -r requirements-rpi.txt
+
+# Core dependencies
+requests>=2.31.0              # HTTP requests for file downloads
+python-dotenv>=1.0.0          # Environment variables from .env
+supabase>=2.0.0               # Supabase client for database/storage
+Pillow>=10.0.0                # Image processing (PIL) for image→PDF conversion
+
+# Note: Pandoc and CUPS are installed via system package manager (apt), not pip
+# See README.md for setup instructions

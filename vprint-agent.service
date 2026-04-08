@@ -1,0 +1,39 @@
+#!/bin/bash
+# VPrint Systemd Service File for Raspberry Pi
+# Location: /etc/systemd/system/vprint-agent.service
+# 
+# Installation:
+#   sudo cp vprint-agent.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable vprint-agent
+#   sudo systemctl start vprint-agent
+#
+# Usage:
+#   sudo systemctl start vprint-agent      - Start agent
+#   sudo systemctl stop vprint-agent       - Stop agent
+#   sudo systemctl restart vprint-agent    - Restart agent
+#   sudo systemctl status vprint-agent     - Check status
+#   sudo journalctl -u vprint-agent -f     - View live logs
+
+[Unit]
+Description=VPrint Printer Agent
+After=network-online.target cups.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/vprint
+Environment="PATH=/home/pi/vprint-env/bin"
+ExecStart=/home/pi/vprint-env/bin/python3 /home/pi/vprint/agent.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# Security options
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
